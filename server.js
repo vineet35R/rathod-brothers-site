@@ -157,12 +157,15 @@ app.post("/admin/login", (req, res) => {
 
     const adminPassword = process.env.ADMIN_PASSWORD;
 
-    if (!password) {
-        return res.status(400).json({
+    const adminPassword = process.env.ADMIN_PASSWORD;
+
+    if (!adminPassword) {
+        return res.status(500).json({
             success: false,
-            message: "Password is required"
+            message: "Server misconfiguration: ADMIN_PASSWORD not set"
         });
     }
+
 
     if (password === adminPassword) {
         return res.json({

@@ -38,6 +38,18 @@ const dbConfig = process.env.DATABASE_URL
 
 const pool = new Pool(dbConfig);
 
+// ✅ ADD THIS BLOCK (DB connection test)
+pool.connect()
+    .then(client => {
+        console.log("✅ PostgreSQL Database Connected");
+        client.release();
+        createTables(); // ⬅️ move table creation here
+    })
+    .catch(err => {
+        console.error("❌ PostgreSQL Connection Failed:", err.message);
+    });
+
+
 // Create Tables if Not Exists
 async function createTables() {
     try {
@@ -65,7 +77,7 @@ async function createTables() {
         console.error("❌ Error creating tables:", err);
     }
 }
-createTables();
+
 // API Endpoint to Save Appointment
 app.post('/api/appointments', async (req, res) => {
     const { name, phone, email, time } = req.body;

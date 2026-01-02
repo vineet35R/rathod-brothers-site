@@ -64,7 +64,6 @@ async function createTables() {
     }
 }
 createTables();
-
 // API Endpoint to Save Appointment
 app.post('/api/appointments', async (req, res) => {
     const { name, phone, email, time } = req.body;
@@ -176,7 +175,9 @@ app.delete('/api/appointments/:id', async (req, res) => {
         res.status(500).json({ success: false, message: 'Database Error' });
     }
 });
-
+app.get("/",(req,res) =>{
+    res.send("Rathod Brohters Backend is live")
+});
 // Start the server
 app.listen(port, '0.0.0.0', () => {
     console.log(`Server is running!`);

@@ -1,5 +1,226 @@
 <!DOCTYPE html>
 <html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Admin Dashboard | Rathod Brothers</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5f6fa;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h1, h2 {
+      text-align: center;
+      margin-top: 30px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+      background: #fff;
+    }
+
+    th, td {
+      padding: 10px;
+      border-bottom: 1px solid #ddd;
+      text-align: left;
+    }
+
+    th {
+      background: #f0f0f0;
+    }
+
+    button {
+      padding: 6px 12px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .delete-btn {
+      background: #e74c3c;
+      color: white;
+    }
+
+    .top-actions {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .top-actions button {
+      margin: 0 5px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>Admin Dashboard</h1>
+
+  <div class="top-actions">
+    <button onclick="location.href='index.html'">← Back to Website</button>
+    <button onclick="refreshData()">Refresh Data</button>
+    <button onclick="logout()">Logout</button>
+  </div>
+
+  <!-- CONTACT MESSAGES -->
+  <h2>Contact Messages</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Message</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody id="contactTableBody"></tbody>
+  </table>
+
+  <!-- APPOINTMENTS -->
+  <h2>Booked Appointments</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Phone</th>
+        <th>Email</th>
+        <th>Date & Time</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody id="appointmentTableBody"></tbody>
+  </table>
+
+  <script>
+    const BACKEND_URL = "https://rathod-brothers-backend.onrender.com";
+
+    const contactTableBody = document.getElementById("contactTableBody");
+    const appointmentTableBody = document.getElementById("appointmentTableBody");
+
+    /* ================= CONTACT MESSAGES ================= */
+
+    async function loadContacts() {
+      try {
+        const res = await fetch(`${BACKEND_URL}/api/messages`);
+        const data = await res.json();
+
+        contactTableBody.innerHTML = "";
+
+        data.forEach(msg => {
+          const row = document.createElement("tr");
+          row.innerHTML = `
+            <td>${msg.id}</td>
+            <td>${msg.name}</td>
+            <td>${msg.email}</td>
+            <td>${msg.message ?? "-"}</td>
+            <td>
+              <button class="delete-btn" onclick="deleteContact(${msg.id})">
+                Delete
+              </button>
+            </td>
+          `;
+          contactTableBody.appendChild(row);
+        });
+
+      } catch (err) {
+        console.error("Contact fetch error:", err);
+      }
+    }
+
+    async function deleteContact(id) {
+      if (!confirm("Delete this contact message?")) return;
+
+      await fetch(`${BACKEND_URL}/api/messages/${id}`, {
+        method: "DELETE"
+      });
+
+      loadContacts();
+    }
+
+    /* ================= APPOINTMENTS ================= */
+
+    async function loadAppointments() {
+      try {
+        const res = await fetch(`${BACKEND_URL}/api/appointments`);
+        const data = await res.json();
+
+        appointmentTableBody.innerHTML = "";
+
+        if (data.length === 0) {
+          appointmentTableBody.innerHTML =
+            `<tr><td colspan="6">No upcoming appointments.</td></tr>`;
+          return;
+        }
+
+        data.forEach(app => {
+          const row = document.createElement("tr");
+          row.innerHTML = `
+            <td>${app.id}</td>
+            <td>${app.name}</td>
+            <td>${app.phone ?? "-"}</td>
+            <td>${app.email}</td>
+            <td>${app.time ?? "-"}</td>
+            <td>
+              <button class="delete-btn" onclick="deleteAppointment(${app.id})">
+                Delete
+              </button>
+            </td>
+          `;
+          appointmentTableBody.appendChild(row);
+        });
+
+      } catch (err) {
+        console.error("Appointment fetch error:", err);
+      }
+    }
+
+    async function deleteAppointment(id) {
+      if (!confirm("Delete this appointment?")) return;
+
+      await fetch(`${BACKEND_URL}/api/appointments/${id}`, {
+        method: "DELETE"
+      });
+
+      loadAppointments();
+    }
+
+    /* ================= GENERAL ================= */
+
+    function refreshData() {
+      loadContacts();
+      loadAppointments();
+    }
+
+    function logout() {
+      localStorage.removeItem("adminLoggedIn");
+      window.location.href = "login.html";
+    }
+
+    window.onload = () => {
+      loadContacts();
+      loadAppointments();
+    };
+  </script>
+
+</body>
+</html>
+
+
+
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
@@ -297,4 +518,4 @@
     </script>
 </body>
 
-</html>
+</html> -->

@@ -138,18 +138,32 @@ app.get('/api/messages', async (req, res) => {
 //         res.status(401).json({ success: false, message: 'Invalid Password' });
 //     }
 // });
-app.post("/admin/login", async (req, res) => {
-  const { username, password } = req.body;
+// API Endpoint for Admin Login (Password-only)
+app.post("/admin/login", (req, res) => {
+    const { password } = req.body;
 
-  if (
-    username === process.env.ADMIN_USERNAME &&
-    password === process.env.ADMIN_PASSWORD
-  ) {
-    res.json({ success: true });
-  } else {
-    res.status(401).json({ error: "Invalid credentials" });
-  }
+    const adminPassword = process.env.ADMIN_PASSWORD;
+
+    if (!password) {
+        return res.status(400).json({
+            success: false,
+            message: "Password is required"
+        });
+    }
+
+    if (password === adminPassword) {
+        return res.json({
+            success: true,
+            message: "Login successful"
+        });
+    } else {
+        return res.status(401).json({
+            success: false,
+            message: "Invalid Password"
+        });
+    }
 });
+
 
 // API Endpoint to Delete a Message
 app.delete('/api/messages/:id', async (req, res) => {

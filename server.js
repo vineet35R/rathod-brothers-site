@@ -155,10 +155,10 @@ app.get('/api/messages', async (req, res) => {
 app.post("/admin/login", (req, res) => {
     const { password } = req.body;
 
+    // ✅ Declare ONLY ONCE
     const adminPassword = process.env.ADMIN_PASSWORD;
 
-    const adminPassword = process.env.ADMIN_PASSWORD;
-
+    // ✅ Check server config
     if (!adminPassword) {
         return res.status(500).json({
             success: false,
@@ -166,19 +166,29 @@ app.post("/admin/login", (req, res) => {
         });
     }
 
+    // ✅ Check user input
+    if (!password) {
+        return res.status(400).json({
+            success: false,
+            message: "Password is required"
+        });
+    }
 
+    // ✅ Compare passwords
     if (password.trim() === adminPassword.trim()) {
         return res.json({
             success: true,
             message: "Login successful"
         });
-    } else {
-        return res.status(401).json({
-            success: false,
-            message: "Invalid Password"
-        });
     }
+
+    // ❌ Wrong password
+    return res.status(401).json({
+        success: false,
+        message: "Invalid Password"
+    });
 });
+
 
 
 // API Endpoint to Delete a Message

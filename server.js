@@ -126,17 +126,29 @@ app.get('/api/messages', async (req, res) => {
 });
 
 // API Endpoint for Admin Login
-app.post('/api/login', (req, res) => {
-    const { password } = req.body;
+// app.post('/api/login', (req, res) => {
+//     const { password } = req.body;
 
-    // Use process.env.ADMIN_PASSWORD for security
-    const adminPassword = process.env.ADMIN_PASSWORD;
+//     // Use process.env.ADMIN_PASSWORD for security
+//     const adminPassword = process.env.ADMIN_PASSWORD;
 
-    if (password === adminPassword) {
-        res.json({ success: true });
-    } else {
-        res.status(401).json({ success: false, message: 'Invalid Password' });
-    }
+//     if (password === adminPassword) {
+//         res.json({ success: true });
+//     } else {
+//         res.status(401).json({ success: false, message: 'Invalid Password' });
+//     }
+// });
+app.post("/admin/login", async (req, res) => {
+  const { username, password } = req.body;
+
+  if (
+    username === process.env.ADMIN_USERNAME &&
+    password === process.env.ADMIN_PASSWORD
+  ) {
+    res.json({ success: true });
+  } else {
+    res.status(401).json({ error: "Invalid credentials" });
+  }
 });
 
 // API Endpoint to Delete a Message

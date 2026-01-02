@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors');
 const { Pool } = require('pg');
 if (process.env.NODE_ENV!=="production"){
 require('dotenv').config(); // Load environment variables from .env file

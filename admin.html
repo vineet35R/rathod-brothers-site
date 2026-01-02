@@ -204,7 +204,7 @@
             }
 
             try {
-                const response = await fetch(`https://rathod-brothers-backend.onrender.com/api/messages${id}`, { method: 'DELETE' });
+                const response = await fetch(`https://rathod-brothers-backend.onrender.com/api/messages/${id}`, { method: 'DELETE' });
                 const data = await response.json();
 
                 if (data.success) {
@@ -269,7 +269,7 @@
                             <td><strong>${appt.name}</strong></td>
                             <td>${appt.phone}</td>
                             <td>${appt.email}</td>
-                            <td style="color:#0284c7; font-weight:600;">${appt.time}</td>
+                            <td style="color:#0284c7; font-weight:600;">${appt.appointment_time}</td>
                             <td style="text-align:center;">
                                 <button onclick="deleteAppointment(${appt.id})" style="background:#d9534f; color:white; border:none; padding:5px 10px; border-radius:4px; cursor:pointer; font-size:12px;">Delete</button>
                             </td>
@@ -285,7 +285,7 @@
 
         async function deleteAppointment(id) {
             if (!confirm("Cancel this appointment?")) return;
-            await fetch(`https://rathod-brothers-backend.onrender.com/api/appointments${id}`, { method: 'DELETE' });
+            await fetch(`https://rathod-brothers-backend.onrender.com/api/appointments/${id}`, { method: 'DELETE' });
             fetchAppointments();
         }
 

@@ -167,7 +167,7 @@ app.post("/admin/login", (req, res) => {
     }
 
 
-    if (password === adminPassword) {
+    if (password.trim() === adminPassword.trim())
         return res.json({
             success: true,
             message: "Login successful"

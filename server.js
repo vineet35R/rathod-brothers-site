@@ -219,6 +219,22 @@ app.get("/",(req,res) =>{
     res.send("Rathod Brohters Backend is live")
 });
 // Start the server
+// ✅ DB Health Check API
+app.get("/api/db-test", async (req, res) => {
+    try {
+        const result = await pool.query("SELECT NOW()");
+        res.json({
+            success: true,
+            time: result.rows[0]
+        });
+    } catch (err) {
+        res.status(500).json({
+            success: false,
+            error: err.message
+        });
+    }
+});
+
 app.listen(port, '0.0.0.0', () => {
     console.log(`Server is running!`);
     console.log(`Local Access:  http://localhost:${port}`);

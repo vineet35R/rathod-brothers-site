@@ -8,6 +8,7 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 // Middleware to parse JSON bodies from POST requests
+app.use(cors());
 app.use(express.json());
 
 // Serve static files with caching

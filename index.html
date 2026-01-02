@@ -1445,7 +1445,7 @@
 
                 botReply("Confirming appointment...");
                 try {
-                    const res = await fetch('/api/appointments', {
+                    const res = await fetch('https://rathod-brothers-backend.onrender.com/api/contact', {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify({

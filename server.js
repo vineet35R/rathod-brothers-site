@@ -1,19 +1,20 @@
 const express = require('express');
 const cors = require('cors');
 const { Pool } = require('pg');
-if (process.env.NODE_ENV!=="production"){
-require('dotenv').config(); // Load environment variables from .env file
+if (process.env.NODE_ENV !== "production") {
+    require('dotenv').config(); // Load environment variables from .env file
 }
 const app = express();
 const port = process.env.PORT || 3000;
 
+const path = require('path');
 // Middleware to parse JSON bodies from POST requests
 app.use(cors());
 app.use(express.json());
 
-// Serve static files with caching
-app.use(express.static('public', {
-    maxAge: '1d', // Cache enabled for production performance
+// Serve static files from current directory
+app.use(express.static(__dirname, {
+    maxAge: '0', // Disable cache for development
     etag: false
 }));
 
@@ -215,7 +216,7 @@ app.delete('/api/appointments/:id', async (req, res) => {
         res.status(500).json({ success: false, message: 'Database Error' });
     }
 });
-app.get("/",(req,res) =>{
+app.get("/", (req, res) => {
     res.send("Rathod Brohters Backend is live")
 });
 // Start the server

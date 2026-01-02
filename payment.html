@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment | Rathod Brothers</title>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=Inter:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #0ea5e9;
+        }
+
+        .cursor-dot {
+            position: fixed;
+            width: 6px;
+            height: 6px;
+            background-color: var(--primary);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            animation: fadeOut 0.8s linear forwards;
+        }
+
+        @keyframes fadeOut {
+            0% {
+                opacity: 0.6;
+                transform: translate(-50%, -50%) scale(1);
+            }
+
+            100% {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(2);
+            }
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: #2b2b2b;
+            background: #f9f9f9;
+        }
+
+        /* HEADER */
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px 5%;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03);
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: none;
+            /* Removing the simple border in favor of shadow */
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo img {
+            height: 65px;
+        }
+
+        nav a {
+            margin-left: 28px;
+            text-decoration: none;
+            color: #6b6b6b;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        nav a:hover {
+            color: #000000;
+            transform: translateY(-2px);
+            text-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* MAIN CONTENT */
+        .payment-container {
+            max-width: 900px;
+            margin: 60px auto;
+            padding: 0 20px;
+        }
+
+        .page-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 36px;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .payment-grid {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            gap: 30px;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+            min-height: 500px;
+        }
+
+        /* SIDEBAR TABS */
+        .payment-methods {
+            background: #f4f4f4;
+            padding: 30px 0;
+            border-right: 1px solid #e5e5e5;
+        }
+
+        .method-tab {
+            padding: 15px 30px;
+            cursor: pointer;
+            font-weight: 500;
+            color: #6b6b6b;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .method-tab:hover {
+            background: #e9e9e9;
+            color: #2b2b2b;
+        }
+
+        .method-tab.active {
+            background: #fff;
+            color: #2b2b2b;
+            border-left: 4px solid #2b2b2b;
+            font-weight: 600;
+        }
+
+        /* CONTENT AREA */
+        .payment-content {
+            padding: 40px 80px 40px 40px;
+            /* Increased right padding */
+        }
+
+        .payment-option {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .payment-option.active {
+            display: block;
+        }
+
+        .upi-apps {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            margin-bottom: 25px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 15px;
+        }
+
+        /* FORMS */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 14px;
+            color: #666;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #dcdcdc;
+            border-radius: 6px;
+            font-size: 16px;
+            transition: 0.3s;
+        }
+
+        input:focus,
+        select:focus {
+            border-color: #2b2b2b;
+            outline: none;
+        }
+
+        .btn-pay {
+            width: 100%;
+            padding: 16px;
+            background: #2b2b2b;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: 0.3s;
+        }
+
+        .btn-pay:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+
+        /* ICONS & IMAGES */
+        .card-icons {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .card-icons img {
+            height: 30px;
+        }
+
+        .upi-apps {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .upi-app {
+            text-align: center;
+            font-size: 12px;
+            color: #666;
+        }
+
+        .upi-app img {
+            width: 50px;
+            height: 50px;
+            border-radius: 10px;
+            margin-bottom: 5px;
+            object-fit: cover;
+        }
+
+        /* HAMBURGER MENU */
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            flex-direction: column;
+            gap: 5px;
+            z-index: 1000;
+        }
+
+        .hamburger span {
+            width: 28px;
+            height: 3px;
+            background: #2b2b2b;
+            border-radius: 2px;
+            transition: 0.3s;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+
+            /* Header layout changes */
+            header {
+                padding: 16px 5%;
+            }
+
+            /* Show hamburger */
+            .hamburger {
+                display: flex;
+            }
+
+            /* Hide standard nav initially, make it a mobile drawer */
+            nav {
+                display: block;
+                /* Override previous display:none if any */
+                position: fixed;
+                right: -100%;
+                /* Hidden off-screen */
+                top: 0;
+                width: 70%;
+                height: 100vh;
+                background: #fff;
+                padding-top: 80px;
+                transition: 0.3s ease;
+                box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+                z-index: 999;
+                display: flex;
+                flex-direction: column;
+            }
+
+            nav.active {
+                right: 0;
+            }
+
+            nav a {
+                display: block;
+                margin: 0;
+                padding: 15px 30px;
+                font-size: 18px;
+                border-bottom: 1px solid #f0f0f0;
+            }
+
+            /* Hamburger Animation when Active */
+            .hamburger.active span:nth-child(1) {
+                transform: rotate(45deg) translate(5px, 6px);
+            }
+
+            .hamburger.active span:nth-child(2) {
+                opacity: 0;
+            }
+
+            .hamburger.active span:nth-child(3) {
+                transform: rotate(-45deg) translate(5px, -6px);
+            }
+
+            .payment-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .payment-methods {
+                display: flex;
+                overflow-x: auto;
+                padding: 10px;
+                border: none;
+                border-bottom: 1px solid #e5e5e5;
+            }
+
+            .method-tab {
+                white-space: nowrap;
+                border-left: none;
+                border-bottom: 4px solid transparent;
+                padding: 10px 20px;
+            }
+
+            .method-tab.active {
+                border-left: none;
+                border-bottom: 4px solid #2b2b2b;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="logo">
+            <img src="rathod-logo.png" alt="Rathod Brothers Logo">
+        </div>
+        <nav id="navbar">
+            <a href="index.html">Home</a>
+            <a href="payment.html" style="color:#000;">Payment</a>
+            <a href="index.html#contact">Contact</a>
+        </nav>
+        <div class="hamburger" id="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </header>
+
+    <!-- JS for Mobile Menu -->
+    <script>
+        const hamburger = document.getElementById('hamburger');
+        const navbar = document.getElementById('navbar');
+
+        if (hamburger) {
+            hamburger.addEventListener('click', () => {
+                navbar.classList.toggle('active');
+                hamburger.classList.toggle('active');
+            });
+
+            // Close menu when a link is clicked
+            document.querySelectorAll('nav a').forEach(link => {
+                link.addEventListener('click', () => {
+                    navbar.classList.remove('active');
+                    hamburger.classList.remove('active');
+                });
+            });
+        }
+    </script>
+
+    <div class="payment-container">
+        <h1 class="page-title">Secure Payment Gateway</h1>
+
+        <div class="payment-grid">
+            <!-- Sidebar -->
+            <div class="payment-methods">
+                <div class="method-tab active" onclick="switchTab('upi')">UPI / QR</div>
+                <div class="method-tab" onclick="switchTab('paypal')">PayPal</div>
+            </div>
+
+            <!-- Content -->
+            <div class="payment-content">
+
+                <!-- UPI SECTION -->
+                <div id="upi" class="payment-option active">
+                    <h3>Pay via UPI</h3>
+                    <div class="upi-apps">
+
+                        <div class="upi-app">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/e/e1/UPI-Logo-vector.svg" alt="UPI"
+                                style="border:1px solid #eee; padding: 5px; object-fit: contain;">
+                            <div>UPI</div>
+                        </div>
+                    </div>
+
+                    <div class="form-group"
+                        style="text-align: center; background: #eee; padding: 15px; border-radius: 8px;">
+                        <label style="margin-bottom: 5px; color: #555;">Paying to:</label>
+                        <strong style="font-size: 18px; color: #2b2b2b;">vineet.rathod35@oksbi</strong>
+                    </div>
+                    <button class="btn-pay">Scan to Pay</button>
+                    <p style="margin-top:20px; color:#888; font-size:14px; text-align:center;">Or scan QR code using any
+                        UPI app</p>
+
+                    <!-- QR Code will appear here -->
+                    <div id="qr-container" style="margin-top: 20px; text-align: center;"></div>
+
+                    <div
+                        style="margin-top: 25px; padding: 15px; background: #e6f3ff; border-radius: 8px; font-size: 14px; text-align: center; border: 1px solid #cce4f7;">
+                        <strong>Important:</strong> After payment, please email the proof/screenshot to: <br>
+                        <a href="mailto:vineet.rathod35@gmail.com"
+                            style="color: #0056b3; font-weight: 600; text-decoration: none;">vineet.rathod35@gmail.com</a>
+                    </div>
+                </div>
+
+                <!-- PAYPAL SECTION -->
+                <div id="paypal" class="payment-option">
+                    <h3>PayPal</h3>
+                    <p style="margin-bottom:20px; color:#666;">You will be redirected to PayPal to complete your
+                        purchase securely.</p>
+                    <button class="btn-pay" style="background:#003087;">Continue with PayPal</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function switchTab(tabId) {
+            // Remove active class from all tabs and contents
+            document.querySelectorAll('.method-tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.payment-option').forEach(c => c.classList.remove('active'));
+
+            // Add active class to clicked tab
+            if (event && event.currentTarget) {
+                event.currentTarget.classList.add('active');
+            }
+
+            // Show content
+            document.getElementById(tabId).classList.add('active');
+        }
+
+        // PAYMENT LOGIC
+        document.querySelectorAll('.btn-pay').forEach(btn => {
+            btn.addEventListener('click', function (e) {
+                e.preventDefault();
+                const section = this.closest('.payment-option').id;
+
+                // 1. UPI LOGIC
+                if (section === 'upi') {
+                    // Try to open UPI app (works on mobile)
+                    const upiID = "vineet.rathod35@oksbi"; // Real UPI ID
+                    const name = "Rathod Brothers";
+                    const link = `upi://pay?pa=${upiID}&pn=${encodeURIComponent(name)}&cu=INR`;
+
+                    // Detect if mobile to try to open app, else show QR instructions
+                    if (/Android|iPhone/i.test(navigator.userAgent)) {
+                        window.location.href = link;
+                    } else {
+                        // DESKTOP: Show QR Code
+                        const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(link)}`;
+
+                        // Check if QR container already exists
+                        let qrContainer = document.getElementById('qr-container');
+                        if (!qrContainer) {
+                            qrContainer = document.createElement('div');
+                            qrContainer.id = 'qr-container';
+                            qrContainer.style.marginTop = '20px';
+                            qrContainer.style.textAlign = 'center';
+                            document.getElementById('upi').appendChild(qrContainer);
+                        }
+
+                        qrContainer.innerHTML = `
+                            <p style="margin-bottom:10px; font-weight:600;">Scan this to pay:</p>
+                            <img src="${qrUrl}" alt="QR Code" style="border: 1px solid #ddd; padding: 10px; border-radius: 8px;">
+                            <p style="margin-top:10px; font-size:13px; color:#666;">Open GPay/PhonePe > Scan QR</p>
+                        `;
+                    }
+                    return;
+                }
+
+                // 2. PAYPAL LOGIC
+                if (section === 'paypal') {
+                    // Redirects to User's Specific PayPal Payment Link
+                    const link = "https://paypal.me/jack37285";
+                    window.open(link, '_blank');
+                    return;
+                }
+            });
+        });
+    </script>
+
+    <script>
+        // Cursor Dot Trail Logic
+        let lastDotTime = 0;
+        document.addEventListener('mousemove', (e) => {
+            const now = Date.now();
+            if (now - lastDotTime < 20) return; lastDotTime = now; const dot = document.createElement('div');
+            dot.classList.add('cursor-dot'); dot.style.left = e.clientX + 'px'; dot.style.top = e.clientY + 'px';
+            document.body.appendChild(dot); setTimeout(() => dot.remove(), 800);
+        });
+    </script>
+</body>
+
+</html>

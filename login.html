@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login | Rathod Brothers</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0ea5e9;
+        }
+
+        .cursor-dot {
+            position: fixed;
+            width: 6px;
+            height: 6px;
+            background-color: var(--primary);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            animation: fadeOut 0.8s linear forwards;
+        }
+
+        @keyframes fadeOut {
+            0% {
+                opacity: 0.6;
+                transform: translate(-50%, -50%) scale(1);
+            }
+
+            100% {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(2);
+            }
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f4f6f8;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .login-card {
+            background: #fff;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            width: 100%;
+            max-width: 350px;
+            text-align: center;
+        }
+
+        h2 {
+            margin-bottom: 25px;
+            color: #2b2b2b;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #dcdcdc;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background: #2b2b2b;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+            font-weight: 500;
+        }
+
+        button:hover {
+            opacity: 0.9;
+        }
+
+        .error {
+            color: #d9534f;
+            margin-top: 15px;
+            font-size: 14px;
+            display: none;
+        }
+
+        .back-link {
+            display: block;
+            margin-top: 20px;
+            color: #666;
+            text-decoration: none;
+            font-size: 14px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="login-card">
+        <h2>Admin Login</h2>
+        <form id="loginForm">
+            <div style="position: relative;">
+                <input type="password" id="password" placeholder="Enter Password" required>
+            </div>
+            <div style="text-align: left; margin-bottom: 20px;">
+                <input type="checkbox" id="showPass" style="width: auto; margin-bottom: 0;">
+                <label for="showPass" style="font-size: 14px; color: #666; cursor: pointer;">Show Password</label>
+            </div>
+            <button type="submit">Login</button>
+            <div id="error" class="error">Invalid Password</div>
+        </form>
+        <a href="index.html" class="back-link">← Back to Website</a>
+    </div>
+
+    <!-- Cursor Dot Container -->
+    <script>
+        // Cursor Dot Trail Logic
+        let lastDotTime = 0;
+        document.addEventListener('mousemove', (e) => {
+            const now = Date.now();
+            if (now - lastDotTime < 20) return;
+            lastDotTime = now;
+
+            const dot = document.createElement('div');
+            dot.classList.add('cursor-dot');
+            dot.style.left = e.clientX + 'px';
+            dot.style.top = e.clientY + 'px';
+            document.body.appendChild(dot);
+
+            setTimeout(() => dot.remove(), 800);
+        });
+
+        // Toggle Password Visibility
+        document.getElementById('showPass').addEventListener('change', function () {
+            const passInput = document.getElementById('password');
+            if (this.checked) {
+                passInput.type = 'text';
+            } else {
+                passInput.type = 'password';
+            }
+        });
+
+        document.getElementById('loginForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const password = document.getElementById('password').value;
+            const errorDiv = document.getElementById('error');
+            const btn = e.target.querySelector('button');
+
+            btn.textContent = 'Checking...';
+            btn.disabled = true;
+            errorDiv.style.display = 'none';
+
+            try {
+                const response = await fetch('/api/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ password })
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    sessionStorage.setItem('isLoggedIn', 'true');
+                    window.location.href = 'admin.html';
+                } else {
+                    errorDiv.style.display = 'block';
+                    btn.textContent = 'Login';
+                    btn.disabled = false;
+                }
+            } catch (err) {
+                console.error(err);
+                errorDiv.innerText = 'Server Error. Try again.';
+                errorDiv.style.display = 'block';
+                btn.textContent = 'Login';
+                btn.disabled = false;
+            }
+        });
+    </script>
+</body>
+
+</html>

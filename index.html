@@ -1,0 +1,1516 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rathod Brothers | At Your Service 24/7</title>
+    <link rel="icon" type="image/svg+xml"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22%230ea5e9%22><path d=%22M12 2C10.8954 2 10 2.89543 10 4C10 5.10457 10.8954 6 12 6C13.1046 6 14 5.10457 14 4C14 2.89543 13.1046 2 12 2Z%22/><path fill-rule=%22evenodd%22 clip-rule=%22evenodd%22 d=%22M4 11C4 8.79086 5.79086 7 8 7H16C18.2091 7 20 8.79086 20 11V16C20 18.2091 18.2091 20 16 20H8C5.79086 20 4 18.2091 4 16V11ZM7 11C7 11.5523 7.44772 12 8 12C8.55228 12 9 11.5523 9 11C9 10.4477 8.55228 10 8 10C7.44772 10 7 10.4477 7 11ZM15 11C15 11.5523 15.4477 12 16 12C16.5523 12 17 11.5523 17 11C17 10.4477 16.5523 10 16 10C15.4477 10 15 10.4477 15 11ZM8 16C8 15.4477 8.44772 15 9 15H15C15.5523 15 16 15.4477 16 16C16 16.5523 15.5523 17 15 17H9C8.44772 17 8 16.5523 8 16Z%22/><path d=%22M3 13C2.44772 13 2 13.4477 2 14V17C2 17.5523 2.44772 18 3 18C3.55228 18 4 17.5523 4 17V14C4 13.4477 3.55228 13 3 13Z%22/><path d=%22M21 13C20.4477 13 20 13.4477 20 14V17C20 17.5523 20.4477 18 21 18C21.5523 18 22 17.5523 22 17V14C22 13.4477 21.5523 13 21 13Z%22/></svg>">
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=Inter:wght@300;400;500&display=swap"
+        rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: #2b2b2b;
+            background: #ffffff;
+        }
+
+        :root {
+            --primary: #0ea5e9;
+            /* Tech Blue */
+            --primary-dark: #0284c7;
+            --text-dark: #1e293b;
+            --text-gray: #64748b;
+            --bg-light: #f8fafc;
+        }
+
+        .cursor-dot {
+            position: fixed;
+            width: 6px;
+            height: 6px;
+            background-color: var(--primary);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            animation: fadeOut 0.8s linear forwards;
+        }
+
+        @keyframes fadeOut {
+            0% {
+                opacity: 0.6;
+                transform: translate(-50%, -50%) scale(1);
+            }
+
+            100% {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(2);
+            }
+        }
+
+        /* HEADER */
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px 5%;
+            /* More breathing room */
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03);
+            /* Ultra soft shadow */
+            background: rgba(255, 255, 255, 0.95);
+            /* Slight frost effect */
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo img {
+            height: 48px;
+            /* Slightly larger */
+        }
+
+        .logo span {
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            color: var(--text-dark);
+        }
+
+        nav a {
+            margin-left: 32px;
+            text-decoration: none;
+            color: var(--text-gray);
+            font-weight: 500;
+            font-size: 15px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        nav a:hover {
+            color: var(--primary);
+        }
+
+        /* Modern Underline Effect */
+        nav a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background-color: var(--primary);
+            transition: width 0.3s;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+
+        /* SLIDER */
+        .slider {
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)), url('background.png');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            padding: 0;
+            min-height: auto;
+            margin: 30px 5%;
+            /* Consistent spacing */
+            border-radius: 24px;
+            /* More modern curve */
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.05);
+        }
+
+        .slides {
+            display: flex;
+            transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+            /* Smooth IOS-like ease */
+        }
+
+        .slide {
+            min-width: 100%;
+            padding: 100px 6%;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .slide h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 56px;
+            /* Impactful size */
+            margin-bottom: 24px;
+            background: linear-gradient(45deg, var(--text-dark), var(--primary-dark));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            /* Gradient Text */
+            line-height: 1.1;
+        }
+
+        .slide p {
+            color: var(--text-gray);
+            font-size: 20px;
+            margin-bottom: 35px;
+            max-width: 600px;
+            line-height: 1.6;
+        }
+
+        .btn {
+            padding: 16px 40px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: #fff;
+            text-decoration: none;
+            border-radius: 50px;
+            /* Pill shape */
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 20px rgba(14, 165, 233, 0.3);
+            /* Colored shadow glow */
+            letter-spacing: 0.5px;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(14, 165, 233, 0.4);
+        }
+
+        /* DOTS */
+        .dots {
+            position: absolute;
+            bottom: 30px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .dot {
+            height: 8px;
+            width: 8px;
+            margin: 0 6px;
+            background: #cbd5e1;
+            border-radius: 50%;
+            display: inline-block;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .dot.active {
+            background: var(--primary);
+            width: 24px;
+            /* Elongated active dot */
+            border-radius: 4px;
+        }
+
+
+        /* SECTIONS */
+        section {
+            padding: 100px 5%;
+            /* More breathing room */
+            min-height: auto;
+        }
+
+        .title {
+            font-family: 'Playfair Display', serif;
+            font-size: 42px;
+            text-align: center;
+            margin-bottom: 60px;
+            color: var(--text-dark);
+            position: relative;
+            display: inline-block;
+            width: 100%;
+        }
+
+        #services {
+            background: #fff;
+        }
+
+        .services {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .card {
+            background: #fff;
+            padding: 50px 40px;
+            text-align: center;
+            border-radius: 20px;
+            border: 1px solid #f1f5f9;
+            /* Subtle border */
+            transition: all 0.4s ease;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary);
+            box-shadow: 0 20px 40px rgba(14, 165, 233, 0.1);
+        }
+
+        .card img {
+            width: 70px;
+            height: 70px;
+            margin-bottom: 25px;
+            object-fit: contain;
+        }
+
+        .card h3 {
+            margin-bottom: 15px;
+            font-size: 24px;
+            color: var(--text-dark);
+        }
+
+        .card p {
+            color: var(--text-gray);
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+
+        /* TESTIMONIALS */
+        .testimonials {
+            background: var(--bg-light);
+            padding: 100px 5%;
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 40px;
+            margin-top: 20px;
+        }
+
+        .testimonial-card {
+            background: #fff;
+            padding: 50px 30px 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+            position: relative;
+            margin-top: 40px;
+            transition: transform 0.3s;
+            border: 1px solid transparent;
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(14, 165, 233, 0.2);
+        }
+
+        .user-img {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            border: 4px solid #fff;
+            position: absolute;
+            top: -35px;
+            left: 30px;
+            /* Aligned left looks cleaner sometimes, but keeping center for now */
+            left: 50%;
+            transform: translateX(-50%);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .quote-icon {
+            font-size: 40px;
+            color: var(--primary);
+            margin-bottom: 10px;
+            opacity: 0.2;
+            display: block;
+        }
+
+        .testimonial-text {
+            font-size: 16px;
+            color: var(--text-dark);
+            line-height: 1.7;
+            margin-bottom: 25px;
+            font-style: normal;
+            /* Cleaner than italic */
+        }
+
+        .user-name {
+            font-weight: 700;
+            color: var(--text-dark);
+            font-size: 17px;
+        }
+
+        .user-role {
+            font-size: 14px;
+            color: var(--primary);
+            margin-top: 4px;
+            font-weight: 500;
+        }
+
+        section.contact {
+            background: #fff;
+        }
+
+        .contact-container {
+            display: flex;
+            max-width: 1100px;
+            margin: 0 auto;
+            gap: 60px;
+            flex-wrap: wrap;
+            align-items: flex-start;
+            /* Align to top */
+        }
+
+        form {
+            flex: 1;
+            min-width: 350px;
+            /* Ensure it doesn't shrink too much */
+        }
+
+        .social-links {
+            flex: 1;
+            min-width: 350px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .social-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            text-decoration: none;
+            color: var(--text-dark);
+            font-size: 16px;
+            font-weight: 500;
+            padding: 15px;
+            /* Reduced padding from 20px */
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+            border: 1px solid #f1f5f9;
+            transition: all 0.3s;
+        }
+
+        .social-item:hover {
+            transform: translateY(-3px);
+            border-color: var(--primary);
+            box-shadow: 0 10px 25px rgba(14, 165, 233, 0.1);
+        }
+
+        .social-item img {
+            width: 30px;
+            /* Restored icon size */
+            height: 30px;
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            padding: 16px;
+            margin-bottom: 20px;
+            border: 2px solid #f1f5f9;
+            border-radius: 12px;
+            background: #ffffff;
+            font-family: inherit;
+            font-size: 15px;
+            transition: all 0.3s;
+        }
+
+        input:focus,
+        textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(14, 165, 233, 0.1);
+        }
+
+        footer {
+            background: var(--text-dark);
+            color: #94a3b8;
+            text-align: center;
+            padding: 50px 5%;
+            font-size: 15px;
+        }
+
+        footer a {
+            color: #cbd5e1;
+            transition: color 0.3s;
+        }
+
+        footer a:hover {
+            color: var(--primary);
+        }
+
+        /* RESPONSIVE */
+        /* RESPONSIVE */
+        .mobile-warning {
+            display: none;
+        }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            flex-direction: column;
+            gap: 5px;
+            z-index: 1000;
+        }
+
+        .hamburger span {
+            width: 28px;
+            height: 3px;
+            background: #2b2b2b;
+            border-radius: 2px;
+            transition: 0.3s;
+        }
+
+        /* Mobile Navigation Styles */
+        @media(max-width:768px) {
+
+            /* Header layout changes */
+            header {
+                padding: 16px 5%;
+            }
+
+            /* Show hamburger */
+            .hamburger {
+                display: flex;
+            }
+
+            /* Mobile Warning Overlay */
+            .mobile-warning {
+                display: flex;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(255, 255, 255, 0.95);
+                z-index: 9999;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                text-align: center;
+                padding: 20px;
+            }
+
+            .mobile-warning h2 {
+                font-family: 'Playfair Display', serif;
+                font-size: 28px;
+                margin-bottom: 15px;
+                color: #2b2b2b;
+            }
+
+            .mobile-warning p {
+                font-size: 16px;
+                color: #6b6b6b;
+                margin-bottom: 25px;
+                max-width: 300px;
+            }
+
+            .mobile-warning button {
+                padding: 12px 28px;
+                background: #2b2b2b;
+                color: white;
+                border: none;
+                border-radius: 4px;
+                font-size: 16px;
+                cursor: pointer;
+            }
+
+            /* Hide standard nav initially, make it a mobile drawer */
+            nav {
+                display: block;
+                /* Override previous display:none */
+                position: fixed;
+                right: -100%;
+                /* Hidden off-screen */
+                top: 0;
+                width: 70%;
+                height: 100vh;
+                background: #fff;
+                padding-top: 80px;
+                transition: 0.3s ease;
+                box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+                z-index: 999;
+            }
+
+            nav.active {
+                right: 0;
+            }
+
+            nav a {
+                display: block;
+                margin: 0;
+                padding: 15px 30px;
+                font-size: 18px;
+                border-bottom: 1px solid #f0f0f0;
+            }
+
+            /* Hamburger Animation when Active */
+            .hamburger.active span:nth-child(1) {
+                transform: rotate(45deg) translate(5px, 6px);
+            }
+
+            .hamburger.active span:nth-child(2) {
+                opacity: 0;
+            }
+
+            .hamburger.active span:nth-child(3) {
+                transform: rotate(-45deg) translate(5px, -6px);
+            }
+
+            /* Adjust font sizes for mobile */
+            .logo span {
+                font-size: 20px;
+            }
+
+            .slide {
+                padding: 80px 5%;
+            }
+
+            .slide h1 {
+                font-size: 32px;
+            }
+
+            .slide p {
+                font-size: 16px;
+            }
+
+            .title {
+                font-size: 28px;
+            }
+
+            section {
+                padding: 60px 5%;
+            }
+
+            .services {
+                grid-template-columns: 1fr;
+                /* Single column on phones */
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="logo">
+            <img src="rathod-logo.png" alt="Rathod Brothers Logo" style="height: 65px;">
+        </div>
+        <nav id="navbar">
+            <a href="admin.html">Admin</a>
+            <a href="payment.html">Payment</a>
+            <a href="#contact">Contact</a>
+        </nav>
+        <div class="hamburger" id="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </header>
+
+    <!-- SLIDER -->
+    <div class="slider">
+        <div class="slides" id="slides">
+            <div class="slide">
+                <h1>At Your Service 24/7</h1>
+                <p>Reliable and professional services you can trust.</p>
+            </div>
+            <div class="slide">
+                <h1>Professional Support</h1>
+                <p>Always available when it matters most.</p>
+            </div>
+            <div class="slide">
+                <h1>Customer First Approach</h1>
+                <p>Your satisfaction is our top priority.</p>
+            </div>
+            <div class="slide">
+                <h1>Trusted by Clients</h1>
+                <p>Built on reliability, integrity, and commitment.</p>
+            </div>
+        </div>
+
+        <div class="dots">
+            <span class="dot active"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+        </div>
+    </div>
+
+    <section id="services">
+        <h2 class="title">Our Services</h2>
+        <div class="services">
+            <!-- Service 1 -->
+            <div class="card">
+                <img src="icon-automation.png" alt="AI Automation"
+                    style="width: 80px; height: 80px; margin-bottom: 20px; object-fit: contain;">
+                <h3>AI Automation</h3>
+                <p>Automate WhatsApp replies, emails, invoices, and repetitive tasks to save time.</p>
+            </div>
+            <!-- Service 2 -->
+            <div class="card">
+                <img src="icon-presence.png" alt="Digital Presence"
+                    style="width: 80px; height: 80px; margin-bottom: 20px; object-fit: contain;">
+                <h3>Digital Presence</h3>
+                <p>Create & manage complete online identity: Website, Google My Business, and Socials.</p>
+            </div>
+            <!-- Service 3 -->
+            <div class="card">
+                <img src="icon-assistant.png" alt="Virtual Assistant"
+                    style="width: 80px; height: 80px; margin-bottom: 20px; object-fit: contain;">
+                <h3>AI Virtual Assistant</h3>
+                <p>Set up AI assistants for businesses to handle appointment booking and FAQs 24/7.</p>
+            </div>
+            <!-- Service 4 -->
+            <div class="card">
+                <img src="icon-analytics.png" alt="Smart Analytics"
+                    style="width: 80px; height: 80px; margin-bottom: 20px; object-fit: contain;">
+                <h3>Smart Analytics</h3>
+                <p>Convert business data into simple, visual dashboards for sales and performance insights.</p>
+            </div>
+            <!-- Service 5 -->
+            <div class="card">
+                <img src="icon-content.png" alt="AI Content Studio"
+                    style="width: 80px; height: 80px; margin-bottom: 20px; object-fit: contain;">
+                <h3>AI Content Studio</h3>
+                <p>AI-generated designs, videos, reviews, and rapid branding content for social media.</p>
+            </div>
+            <!-- Service 6 -->
+            <div class="card">
+                <img src="icon-finance.png" alt="Financial Assistant"
+                    style="width: 80px; height: 80px; margin-bottom: 20px; object-fit: contain;">
+                <h3>Financial Assistant</h3>
+                <p>Smart AI assistance for personal finance management and budget tracking.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="testimonials" id="testimonials">
+        <h2 class="title">What Our Clients Say</h2>
+
+        <div class="testimonial-grid">
+            <!-- Review 1 -->
+            <div class="testimonial-card">
+                <img src="https://randomuser.me/api/portraits/men/32.jpg" class="user-img" alt="User">
+                <span class="quote-icon">❝</span>
+                <p class="testimonial-text">"Rathod Brothers transformed our online presence completely. Their AI
+                    automation saved us 20 hours a week! Highly recommended."</p>
+                <div class="user-name">Rahul Sharma</div>
+                <div class="user-role">CEO, TechStart</div>
+            </div>
+
+            <!-- Review 2 -->
+            <div class="testimonial-card">
+                <img src="https://randomuser.me/api/portraits/women/44.jpg" class="user-img" alt="User">
+                <span class="quote-icon">❝</span>
+                <p class="testimonial-text">"The dashboard they built gave us insights we never had before. Very
+                    professional team and timely delivery."</p>
+                <div class="user-name">Priya Patel</div>
+                <div class="user-role">Director, Creative Agency</div>
+            </div>
+
+            <!-- Review 3 -->
+            <div class="testimonial-card">
+                <img src="https://randomuser.me/api/portraits/men/86.jpg" class="user-img" alt="User">
+                <span class="quote-icon">❝</span>
+                <p class="testimonial-text">"Excellent support! Their virtual assistant setup handles all our
+                    booking
+                    queries perfectly. A game changer."</p>
+                <div class="user-name">Amit Verma</div>
+                <div class="user-role">Founder, Fitness Hub</div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <section class="contact" id="contact">
+        <h2 class="title">CONTACT US</h2>
+        <div class="contact-container">
+            <!-- Left Side: Form -->
+            <form id="contactForm" novalidate>
+                <div style="display: flex; gap: 10px; margin-bottom: 0;">
+                    <input type="text" id="firstName" placeholder="First Name" style="flex: 1;">
+                    <input type="text" id="middleName" placeholder="Middle Name" style="flex: 1;">
+                    <input type="text" id="lastName" placeholder="Last Name" style="flex: 1;">
+                </div>
+                <input type="email" id="email" name="email" placeholder="Your Email">
+                <textarea id="message" name="message" rows="4" placeholder="Your Message"></textarea>
+                <button type="submit" class="btn">Send Message</button>
+            </form>
+
+            <!-- Right Side: Social Media -->
+            <div class="social-links">
+                <a href="https://www.linkedin.com/company/110916340/" class="social-item" target="_blank">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png"
+                        alt="LinkedIn">
+                    <span>Connect on LinkedIn</span>
+                </a>
+                <a href="https://x.com/RathodBrothers7" class="social-item" target="_blank">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/5/5a/X_icon_2.svg" alt="X (Twitter)">
+                    <span>Follow on X</span>
+                </a>
+                <a href="https://www.instagram.com/rathodbrother7/" class="social-item" target="_blank">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram">
+                    <span>Follow on Instagram</span>
+                </a>
+                <a href="https://wa.me/919142055109" class="social-item" target="_blank">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
+                    <span>Chat on WhatsApp</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        © 2025 Rathod Brothers · At Your Service 24/7
+    </footer>
+
+    <!-- AI Chatbot Widget -->
+    <div id="chatbot-icon" onclick="toggleChat()">
+        <!-- SVG Icon: Robot Head -->
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+                d="M12 2C10.8954 2 10 2.89543 10 4C10 5.10457 10.8954 6 12 6C13.1046 6 14 5.10457 14 4C14 2.89543 13.1046 2 12 2Z"
+                fill="white" />
+            <path fill-rule="evenodd" clip-rule="evenodd"
+                d="M4 11C4 8.79086 5.79086 7 8 7H16C18.2091 7 20 8.79086 20 11V16C20 18.2091 18.2091 20 16 20H8C5.79086 20 4 18.2091 4 16V11ZM7 11C7 11.5523 7.44772 12 8 12C8.55228 12 9 11.5523 9 11C9 10.4477 8.55228 10 8 10C7.44772 10 7 10.4477 7 11ZM15 11C15 11.5523 15.4477 12 16 12C16.5523 12 17 11.5523 17 11C17 10.4477 16.5523 10 16 10C15.4477 10 15 10.4477 15 11ZM8 16C8 15.4477 8.44772 15 9 15H15C15.5523 15 16 15.4477 16 16C16 16.5523 15.5523 17 15 17H9C8.44772 17 8 16.5523 8 16Z"
+                fill="white" />
+            <path
+                d="M3 13C2.44772 13 2 13.4477 2 14V17C2 17.5523 2.44772 18 3 18C3.55228 18 4 17.5523 4 17V14C4 13.4477 3.55228 13 3 13Z"
+                fill="white" />
+            <path
+                d="M21 13C20.4477 13 20 13.4477 20 14V17C20 17.5523 20.4477 18 21 18C21.5523 18 22 17.5523 22 17V14C22 13.4477 21.5523 13 21 13Z"
+                fill="white" />
+        </svg>
+    </div>
+
+    <div id="chat-window">
+        <div class="chat-header">
+            <span>AI Assistant</span>
+            <span style="cursor:pointer;" onclick="toggleChat()">×</span>
+        </div>
+        <div id="chat-messages" class="chat-body">
+            <!-- Messages go here -->
+        </div>
+        <div class="chat-footer">
+            <input type="text" id="chat-input" placeholder="Type here..." onkeypress="handleEnter(event)">
+            <button onclick="sendMessage()">➤</button>
+        </div>
+    </div>
+
+    <style>
+        #chatbot-icon {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            background: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(14, 165, 233, 0.4);
+            z-index: 10000;
+            transition: transform 0.3s;
+        }
+
+        #chatbot-icon:hover {
+            transform: scale(1.1);
+        }
+
+        #chat-window {
+            position: fixed;
+            bottom: 90px;
+            right: 20px;
+            width: 320px;
+            height: 450px;
+            background: #fff;
+            border-radius: 15px;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.15);
+            display: none;
+            flex-direction: column;
+            z-index: 10000;
+            overflow: hidden;
+            font-family: 'Inter', sans-serif;
+            border: 1px solid #e2e8f0;
+        }
+
+        .chat-header {
+            background: var(--primary);
+            color: #fff;
+            padding: 15px;
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .chat-body {
+            flex: 1;
+            padding: 15px;
+            overflow-y: auto;
+            background: #f8fafc;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .chat-footer {
+            padding: 10px;
+            border-top: 1px solid #eee;
+            display: flex;
+            gap: 5px;
+            background: #fff;
+        }
+
+        .chat-footer input {
+            flex: 1;
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            outline: none;
+            font-size: 14px;
+        }
+
+        .chat-footer button {
+            background: var(--primary);
+            color: white;
+            border: none;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .msg {
+            max-width: 80%;
+            padding: 8px 12px;
+            border-radius: 12px;
+            font-size: 14px;
+            line-height: 1.4;
+            word-wrap: break-word;
+        }
+
+        .bot-msg {
+            background: #e0f2fe;
+            color: #0f172a;
+            align-self: flex-start;
+            border-bottom-left-radius: 2px;
+        }
+
+        .user-msg {
+            background: var(--primary);
+            color: #fff;
+            align-self: flex-end;
+            border-bottom-right-radius: 2px;
+        }
+
+        .chat-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin: 5px 0;
+            max-width: 85%;
+        }
+
+        .chat-chip {
+            background: #fff;
+            border: 1px solid var(--primary);
+            color: var(--primary);
+            padding: 6px 12px;
+            border-radius: 16px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .chat-chip:hover {
+            background: var(--primary);
+            color: #fff;
+        }
+
+        .chat-chip.disabled {
+            background: #e2e8f0;
+            color: #94a3b8;
+            border-color: #cbd5e1;
+            pointer-events: none;
+            text-decoration: line-through;
+        }
+
+        /* Notification Bubble */
+        #chat-notification {
+            position: fixed;
+            bottom: 35px;
+            right: 90px;
+            background: #fff;
+            padding: 8px 12px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+            font-size: 13px;
+            font-weight: 600;
+            color: #333;
+            white-space: nowrap;
+            opacity: 0;
+            transform: translateX(10px);
+            transition: all 0.4s ease;
+            pointer-events: none;
+            z-index: 10001;
+        }
+
+        #chat-notification.show {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        #chat-notification::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            right: -6px;
+            transform: translateY(-50%);
+            border-width: 6px;
+            border-style: solid;
+            border-color: transparent transparent transparent #fff;
+        }
+    </style>
+
+    <!-- Notification Bubble -->
+    <div id="chat-notification">Book your Appointment</div>
+
+
+    <!-- Mobile Warning Overlay -->
+    <div class="mobile-warning" id="mobileWarning">
+        <h2>Optimized for Desktop</h2>
+        <p>This website works best on a desktop or laptop. Please switch to "Desktop Site" in your browser settings
+            or
+            use a computer.</p>
+        <button onclick="document.getElementById('mobileWarning').style.display='none'">Continue Anyway</button>
+    </div>
+
+    <!-- Cursor Dot Container (Optional, dots are appended to body) -->
+
+    <script>
+        // Cursor Dot Trail Logic
+        let lastDotTime = 0;
+        document.addEventListener('mousemove', (e) => {
+            const now = Date.now();
+            if (now - lastDotTime < 20) return; // Limit to 50 dots/sec for performance
+            lastDotTime = now;
+
+            const dot = document.createElement('div');
+            dot.classList.add('cursor-dot');
+            dot.style.left = e.clientX + 'px';
+            dot.style.top = e.clientY + 'px';
+            document.body.appendChild(dot);
+
+            // Cleanup
+            setTimeout(() => {
+                dot.remove();
+            }, 800);
+        });
+
+        // Mobile Menu Logic
+        const hamburger = document.getElementById('hamburger');
+        const navbar = document.getElementById('navbar');
+
+        hamburger.addEventListener('click', () => {
+            navbar.classList.toggle('active');
+            hamburger.classList.toggle('active');
+        });
+
+        // Close menu when a link is clicked
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', () => {
+                navbar.classList.remove('active');
+                hamburger.classList.remove('active');
+            });
+        });
+
+        // Slider Logic
+        let index = 0;
+        const slides = document.getElementById("slides");
+        const dots = document.querySelectorAll(".dot");
+
+        function showSlide(i) {
+            slides.style.transform = `translateX(-${i * 100}%)`;
+            dots.forEach(d => d.classList.remove("active"));
+            dots[i].classList.add("active");
+        }
+
+        setInterval(() => {
+            index = (index + 1) % 4;
+            showSlide(index);
+        }, 4000);
+
+        dots.forEach((dot, i) => {
+            dot.onclick = () => {
+                index = i;
+                showSlide(index);
+            }
+        });
+
+        // Contact Form Logic
+        document.getElementById('contactForm').addEventListener('submit', async function (e) {
+            e.preventDefault();
+
+            // Get values
+            const first = document.getElementById('firstName').value.trim();
+            const middle = document.getElementById('middleName').value.trim();
+            const last = document.getElementById('lastName').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const message = document.getElementById('message').value.trim();
+
+            // 1. Check First Name
+            if (!first) {
+                alert("Please enter your First Name.");
+                document.getElementById('firstName').focus();
+                return;
+            }
+
+            // 2. Check Email
+            if (!email) {
+                alert("Please enter your Email Address.");
+                document.getElementById('email').focus();
+                return;
+            }
+
+            // 3. Check Message Word Count (At least 5 words)
+            const wordCount = message.split(/\s+/).filter(word => word.length > 0).length;
+            if (wordCount < 5) {
+                alert(`Your message is too short (${wordCount} words). Please write at least 5 words.`);
+                document.getElementById('message').focus();
+                return;
+            }
+
+            // Combine them into one string for the backend
+            const name = `${first} ${middle} ${last}`.trim().replace(/\s+/g, ' ');
+
+            const btn = this.querySelector('.btn');
+            const originalText = btn.textContent;
+            btn.textContent = 'Sending...';
+            btn.disabled = true;
+
+            try {
+                const response = await fetch('/api/contact', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ name, email, message })
+                });
+
+                if (response.ok) {
+                    alert('Message sent successfully!');
+                    this.reset();
+                } else {
+                    alert('Failed to send message. Please try again.');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('An error occurred. Please try again.');
+            } finally {
+                btn.textContent = originalText;
+                btn.disabled = false;
+            }
+        });
+    </script>
+    <script>
+        // --- CHATBOT INTELLIGENCE & NOTIFICATION ---
+        let chatState = 'INIT';
+        let appointmentData = {};
+        const chatBody = document.getElementById('chat-messages');
+
+        // Notification Logic
+        function showNotification() {
+            const notif = document.getElementById('chat-notification');
+            const win = document.getElementById('chat-window');
+            if (notif && (win.style.display === 'none' || !win.style.display)) {
+                notif.classList.add('show');
+                setTimeout(() => notif.classList.remove('show'), 5000);
+            }
+        }
+        setTimeout(showNotification, 3000);
+        setInterval(showNotification, 20000);
+
+        function toggleChat() {
+            const win = document.getElementById('chat-window');
+            const notif = document.getElementById('chat-notification');
+            if (win.style.display === 'none' || !win.style.display) {
+                win.style.display = 'flex';
+                notif.classList.remove('show');
+                if (chatBody.children.length === 0) {
+                    botReply("Hi! I am here to help you to book your appointment.");
+                    setTimeout(() => botReply("Can I have your Name?"), 600);
+                    chatState = 'NAME';
+                }
+            } else {
+                win.style.display = 'none';
+            }
+        }
+
+        function handleEnter(e) {
+            if (e.key === 'Enter') sendMessage();
+        }
+
+        // Modified: accept text argument or default to input value
+        function sendMessage(optText) {
+            const input = document.getElementById('chat-input');
+            const txt = optText || input.value.trim();
+            if (!txt) return;
+
+            addMessage(txt, 'user-msg');
+            input.value = '';
+
+            // If user clicked a chip, remove chips to prevent re-click? 
+            // Better UX: disable old chips or just scroll down. 
+            // For now, simplify.
+
+            setTimeout(() => processInput(txt), 500);
+        }
+
+        function addMessage(text, className) {
+            const div = document.createElement('div');
+            div.className = `msg ${className}`;
+            div.innerHTML = text; // Allow HTML for links
+            chatBody.appendChild(div);
+            scrollToBottom();
+        }
+
+        function botReply(text) {
+            addMessage(text, 'bot-msg');
+        }
+
+        function scrollToBottom() {
+            chatBody.scrollTop = chatBody.scrollHeight;
+        }
+
+        // Render Clickable Options
+        function showOptions(options) {
+            const div = document.createElement('div');
+            div.className = 'chat-options';
+            options.forEach(opt => {
+                const btn = document.createElement('div');
+                btn.className = 'chat-chip';
+                btn.textContent = opt.label;
+                if (opt.disabled) {
+                    btn.classList.add('disabled');
+                } else {
+                    btn.onclick = () => sendMessage(opt.value);
+                }
+                div.appendChild(btn);
+            });
+            chatBody.appendChild(div);
+            scrollToBottom();
+        }
+
+        async function processInput(text) {
+            const lowText = text.toLowerCase();
+            const isYes = lowText === 'yes' || lowText === 'y' || lowText === 'correct' || lowText === 'yeah' || lowText === 'sure' || lowText === 'confirm';
+            const isNo = lowText === 'no' || lowText === 'n' || lowText === 'nope' || lowText === 'wrong' || lowText === 'change';
+
+            // GLOBAL: Handle "Why"
+            if (lowText.includes('why')) {
+                botReply("I need your details to schedule the appointment.");
+                return;
+            }
+
+            // GLOBAL: Handle Name Correction (e.g., "my name is Vineet")
+            if (lowText.startsWith('my name is ') || lowText.startsWith('change name to ')) {
+                const namePart = lowText.includes(' is ') ? text.substring(lowText.indexOf(' is ') + 4) : text.substring(lowText.indexOf(' to ') + 4);
+                const newName = namePart.trim();
+
+                if (newName.length > 2) {
+                    appointmentData.name = newName;
+                    botReply(`Got it. I've updated your name to ${newName}.`);
+
+                    // Re-prompt based on current state
+                    if (chatState === 'ASK_COUNTRY') {
+                        botReply("Are you from India?");
+                        showOptions([{ label: 'Yes', value: 'Yes' }, { label: 'No', value: 'No' }]);
+                    } else if (chatState === 'PHONE_COUNTRY_CODE') {
+                        botReply("Please enter your Country Code (e.g., +1).");
+                    } else if (chatState === 'PHONE_INDIA' || chatState === 'PHONE_INTERNATIONAL') {
+                        botReply("Please enter your Phone Number.");
+                    } else if (chatState === 'EMAIL') {
+                        botReply("Please enter your Email Address.");
+                    }
+                    return;
+                }
+            }
+
+            // GLOBAL Cancel/Restart
+            if ((lowText === 'cancel' || lowText === 'restart')) {
+                botReply("Restarting. Say 'Hi'.");
+                chatState = 'INIT';
+                return;
+            }
+
+            // --- STATE MACHINE ---
+
+            if (chatState === 'NAME') {
+                const invalidNames = ['hi', 'hello', 'hey', 'name', 'why', 'no', 'ok', 'yes', 'how', 'what', 'when', 'who', 'thanks', 'thank', 'good', 'morning', 'evening', 'afternoon', 'bye', 'goodbye'];
+                const isOnlyLetters = /^[a-zA-Z\s]+$/.test(text);
+
+                if (text.length < 3 || invalidNames.includes(lowText) || !isOnlyLetters) {
+                    botReply("That doesn't look like a real name. Please enter your full Name (letters only).");
+                    return;
+                }
+                appointmentData.name = text;
+                botReply(`Thanks ${text}.`);
+                setTimeout(() => botReply("Are you from India?"), 400);
+                showOptions([{ label: 'Yes', value: 'Yes' }, { label: 'No', value: 'No' }]);
+                chatState = 'ASK_COUNTRY';
+                return;
+            }
+
+            if (chatState === 'ASK_COUNTRY') {
+                if (isYes) {
+                    botReply("Great. Please enter your 10-digit Phone Number.");
+                    chatState = 'PHONE_INDIA';
+                } else if (isNo) {
+                    botReply("Please enter your Country Code (e.g., +1, +44).");
+                    chatState = 'PHONE_COUNTRY_CODE';
+                } else {
+                    botReply("Please click Yes or No.");
+                    showOptions([{ label: 'Yes', value: 'Yes' }, { label: 'No', value: 'No' }]);
+                }
+                return;
+            }
+
+            if (chatState === 'PHONE_INDIA') {
+                let digits = text.replace(/[^0-9]/g, '');
+                // Allow if user typed 91 start
+                if (digits.length === 12 && digits.startsWith('91')) {
+                    appointmentData.phone = '+' + digits;
+                } else if (digits.length === 10) {
+                    appointmentData.phone = '+91' + digits;
+                } else {
+                    botReply("Please enter a valid 10-digit mobile number.");
+                    return;
+                }
+                botReply(`You entered ${appointmentData.phone}. Is this correct?`);
+                showOptions([{ label: 'Yes', value: 'Yes' }, { label: 'No', value: 'No' }]);
+                chatState = 'CONFIRM_PHONE';
+                return;
+            }
+
+            if (chatState === 'PHONE_COUNTRY_CODE') {
+                if (!text.startsWith('+') && !digitsOnly(text)) {
+                    botReply("Please enter a valid code (e.g., +1).");
+                    return;
+                }
+                appointmentData.tempCode = text.startsWith('+') ? text : '+' + text;
+                botReply(`Code: ${appointmentData.tempCode}. Now enter your 10-digit Phone Number.`);
+                chatState = 'PHONE_INTERNATIONAL';
+                return;
+            }
+
+            if (chatState === 'PHONE_INTERNATIONAL') {
+                let digits = text.replace(/[^0-9]/g, '');
+
+                if (digits.length !== 10) {
+                    botReply("Please enter a valid 10-digit mobile number.");
+                    return;
+                }
+                appointmentData.phone = appointmentData.tempCode + digits;
+                botReply(`You entered ${appointmentData.phone}. Is this correct?`);
+                showOptions([{ label: 'Yes', value: 'Yes' }, { label: 'No', value: 'No' }]);
+                chatState = 'CONFIRM_PHONE';
+                return;
+            }
+
+            if (chatState === 'CONFIRM_PHONE') {
+                if (isNo) {
+                    botReply("Okay. Are you from India?");
+                    showOptions([{ label: 'Yes', value: 'Yes' }, { label: 'No', value: 'No' }]);
+                    chatState = 'ASK_COUNTRY';
+                } else if (isYes) {
+                    botReply("Great. Now tell me your Email Address.");
+                    chatState = 'EMAIL';
+                } else {
+                    botReply("Please click Yes or No.");
+                    showOptions([{ label: 'Yes', value: 'Yes' }, { label: 'No', value: 'No' }]);
+                }
+                return;
+            }
+
+            if (chatState === 'EMAIL') {
+                if (!text.includes('@') || !text.includes('.')) {
+                    botReply("Invalid email. Try again.");
+                    return;
+                }
+                appointmentData.email = text;
+                botReply(`Email: ${text}. Is this correct?`);
+                showOptions([{ label: 'Yes', value: 'Yes' }, { label: 'No', value: 'No' }]);
+                chatState = 'CONFIRM_EMAIL';
+                return;
+            }
+
+            if (chatState === 'CONFIRM_EMAIL') {
+                if (isNo) {
+                    botReply("Enter Email again.");
+                    chatState = 'EMAIL';
+                } else if (isYes) {
+                    botReply("Please select a Date:");
+
+                    // Generate Dates
+                    const today = new Date();
+                    const tomorrow = new Date(today); tomorrow.setDate(today.getDate() + 1);
+                    const overmorrow = new Date(today); overmorrow.setDate(today.getDate() + 2);
+
+                    const opts = [
+                        { label: tomorrow.toDateString(), value: tomorrow.toDateString() },
+                        { label: overmorrow.toDateString(), value: overmorrow.toDateString() }
+                    ];
+                    showOptions(opts);
+                    chatState = 'DATE_SELECT';
+                } else {
+                    botReply("Please click Yes or No.");
+                }
+                return;
+            }
+
+            if (chatState === 'DATE_SELECT') {
+                appointmentData.date = text;
+                botReply(`Date: ${text}. Please select a Time Slot:`);
+
+                // Generate Time Slots (10am - 6pm)
+                const times = [];
+                for (let h = 10; h < 18; h++) {
+                    times.push(formatTime(h, 0));
+                    times.push(formatTime(h, 30));
+                }
+                times.push("18:00"); // 6 PM
+
+                // Mock Booked Slots (randomly disable one for realism?)
+                const booked = ["12:30", "15:00"];
+
+                const opts = times.map(t => ({
+                    label: t,
+                    value: t,
+                    disabled: booked.includes(t)
+                }));
+
+                showOptions(opts);
+                chatState = 'TIME_SELECT';
+                return;
+            }
+
+            if (chatState === 'TIME_SELECT') {
+                appointmentData.time = text;
+                appointmentData.fullTime = `${appointmentData.date} at ${appointmentData.time}`;
+
+                botReply(`Booking for: <b>${appointmentData.fullTime}</b>`);
+                botReply("Are you sure you want to confirm your booking?");
+                showOptions([{ label: 'Confirm Booking', value: 'Confirm' }, { label: 'Cancel', value: 'Cancel' }]);
+                chatState = 'FINAL_CONFIRM';
+                return;
+            }
+
+            if (chatState === 'FINAL_CONFIRM') {
+                if (lowText === 'cancel') {
+                    botReply("Booking Cancelled. Say 'Hi' to start over.");
+                    chatState = 'INIT';
+                    return;
+                }
+
+                botReply("Confirming appointment...");
+                try {
+                    const res = await fetch('/api/appointments', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            name: appointmentData.name,
+                            phone: appointmentData.phone,
+                            email: appointmentData.email,
+                            time: appointmentData.fullTime
+                        })
+                    });
+
+                    if (res.ok) {
+                        botReply(`✅ <b>Confirmed!</b> We'll see you on ${appointmentData.fullTime}.`);
+
+                        // WhatsApp Notification Logic
+                        const waMsg = `*New Appointment Booking!* 📅\n\n*Name:* ${appointmentData.name}\n*Phone:* ${appointmentData.phone}\n*Email:* ${appointmentData.email}\n*Time:* ${appointmentData.fullTime}`;
+                        const waLink = `https://wa.me/919142055109?text=${encodeURIComponent(waMsg)}`;
+
+                        botReply("Opening WhatsApp to send details...");
+
+                        // Attempt to Auto-Open WhatsApp
+                        setTimeout(() => {
+                            window.open(waLink, '_blank');
+                        }, 1000);
+
+                        // Fallback Button
+                        const btn = `<a href="${waLink}" target="_blank" style="display:inline-block; margin-top:10px; padding:8px 15px; background:#25D366; color:white; border-radius:20px; text-decoration:none; font-weight:bold; font-size:13px;">📲 Click here if WhatsApp didn't open</a>`;
+                        botReply(btn);
+
+                    } else {
+                        throw new Error('Failed');
+                    }
+                } catch (e) {
+                    botReply("⚠️ Booked (Local Mode). Contacting you soon.");
+                }
+                chatState = 'DONE';
+                return;
+            }
+
+            if (chatState === 'DONE') {
+                botReply("All set! Need anything else?");
+                return;
+            }
+
+            // Fallback
+            if (lowText.includes('hi') || chatState === 'INIT') {
+                botReply("Hi! Let's book your appointment.");
+                setTimeout(() => botReply("Name?"), 600);
+                chatState = 'NAME';
+            } else {
+                botReply("Sorry, I didn't get that.");
+                const link = `<a href="https://wa.me/919142055109" target="_blank" style="color:#047857; text-decoration:none; font-weight:bold;">Click here to WhatsApp &rarr;</a>`;
+                botReply(link);
+            }
+        }
+
+        function formatTime(h, m) {
+            const ampm = h >= 12 ? 'PM' : 'AM';
+            const h12 = h % 12 || 12;
+            const mStr = m === 0 ? '00' : m;
+            return `${h12}:${mStr} ${ampm}`;
+        }
+
+        function digitsOnly(str) { return /^\d+$/.test(str); }
+    </script>
+
+</body>
+
+</html>

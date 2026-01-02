@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rathod Brothers | Quick Links</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0ea5e9;
+            --bg: #f8fafc;
+            --card-bg: #ffffff;
+            --text-main: #1e293b;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            min-height: 100vh;
+            color: var(--text-main);
+        }
+
+        .container {
+            width: 100%;
+            max-width: 480px;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        .profile-img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: #fff;
+            padding: 5px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            object-fit: contain;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-size: 24px;
+            font-weight: 700;
+            margin: 0 0 8px 0;
+            color: #0f172a;
+        }
+
+        p {
+            color: #64748b;
+            margin: 0 0 30px 0;
+            font-size: 15px;
+        }
+
+        .links-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .link-card {
+            background: var(--card-bg);
+            padding: 16px;
+            border-radius: 12px;
+            text-decoration: none;
+            color: var(--text-main);
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+            transition: transform 0.2s, box-shadow 0.2s;
+            border: 1px solid #e2e8f0;
+        }
+
+        .link-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(14, 165, 233, 0.15);
+            border-color: var(--primary);
+        }
+
+        .link-card img {
+            width: 24px;
+            height: 24px;
+        }
+
+        .verified-badge {
+            color: var(--primary);
+            margin-left: 5px;
+        }
+
+        footer {
+            margin-top: 40px;
+            font-size: 12px;
+            color: #94a3b8;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <!-- Logo / Profile -->
+        <img src="rathod-logo.png" alt="Rathod Brothers" class="profile-img">
+
+        <h1>Rathod Brothers <span class="verified-badge">✔</span></h1>
+        <p>AI Automation & Tech Solutions</p>
+
+        <div class="links-grid">
+            <!-- Website -->
+            <a href="index.html" class="link-card">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/3/3f/Globe_icon_2.svg" alt="Web">
+                Official Website
+            </a>
+
+            <!-- WhatsApp -->
+            <a href="https://wa.me/919142055109" class="link-card"
+                style="background: #ecfdf5; border-color: #d1fae5; color: #047857;">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
+                Chat on WhatsApp
+            </a>
+
+            <!-- X (Twitter) -->
+            <a href="https://x.com/RathodBrothers7" class="link-card"
+                style="background: #fdf2f8; border-color: #fce7f3; color: #000;">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/5/5a/X_icon_2.svg" alt="X">
+                Follow on X
+            </a>
+
+            <!-- Instagram -->
+            <a href="https://www.instagram.com/rathodbrother7/" class="link-card"
+                style="background: #fff5f5; border-color: #fed7d7; color: #c53030;">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram">
+                Follow on Instagram
+            </a>
+
+            <!-- LinkedIn -->
+            <a href="https://www.linkedin.com/company/110916340/" class="link-card"
+                style="background: #f0f9ff; border-color: #e0f2fe; color: #0077b5;">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png"
+                    alt="LinkedIn">
+                Connect on LinkedIn
+            </a>
+
+            <!-- Payment -->
+            <a href="payment.html" class="link-card">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/d/d6/Qrcode_infinity.svg" alt="Payment">
+                Make a Payment
+            </a>
+        </div>
+
+        <footer>
+            © 2025 Rathod Brothers
+        </footer>
+    </div>
+
+</body>
+
+</html>

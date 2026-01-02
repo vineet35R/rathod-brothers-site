@@ -406,6 +406,20 @@
             gap: 20px;
             box-sizing: border-box;
         }
+        /* MOBILE FIX */
+            @media (max-width: 768px) {
+                .contact-container {
+                    flex-direction: column;
+                    width: 100%;
+                    padding: 0;
+                    overflow-x: hidden;
+                }
+            
+                form,
+                .social-links {
+                    width: 100%;
+                }
+            }
 
         .social-item {
             display: flex;

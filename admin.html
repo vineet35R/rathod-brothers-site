@@ -251,7 +251,7 @@
             status.innerText = 'Loading...';
 
             try {
-                const res = await fetch('https://rathod-brothers-backend.onrender.com/api/messages');
+                const res = await fetch('https://rathod-brothers-backend.onrender.com/api/appointments');
                 const data = await res.json();
                 status.style.display = 'none';
 
@@ -285,7 +285,7 @@
 
         async function deleteAppointment(id) {
             if (!confirm("Cancel this appointment?")) return;
-            await fetch(`https://rathod-brothers-backend.onrender.com/api/messages${id}`, { method: 'DELETE' });
+            await fetch(`https://rathod-brothers-backend.onrender.com/api/appointments${id}`, { method: 'DELETE' });
             fetchAppointments();
         }
 

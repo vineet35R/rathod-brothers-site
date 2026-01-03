@@ -146,11 +146,12 @@
     <script>
         // Security Check
         function checkAuth() {
-            if (!sessionStorage.getItem('isLoggedIn')) {
-                window.location.href = 'login.html';
-            }
+        if (!localStorage.getItem('isLoggedIn')) {
+            window.location.href = 'login.html';
         }
-        checkAuth(); // Run immediately
+    }
+    checkAuth();
+
 
         function logout() {
             sessionStorage.removeItem('isLoggedIn');

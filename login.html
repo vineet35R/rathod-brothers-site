@@ -170,7 +170,7 @@
                 const data = await response.json();
 
                 if (data.success) {
-                    sessionStorage.setItem('isLoggedIn', 'true');
+                    localStorage.setItem('isLoggedIn', 'true');
                     window.location.href = 'admin.html';
                 } else {
                     errorDiv.style.display = 'block';

@@ -145,11 +145,19 @@
 
     <script>
         // Security Check
+    //     function checkAuth() {
+    //     if (!localStorage.getItem('isLoggedIn')) {
+    //         window.location.href = 'login.html';
+    //     }
+    // }
+    // checkAuth();
         function checkAuth() {
-        if (!localStorage.getItem('isLoggedIn')) {
+        if (localStorage.getItem('isLoggedIn') !== 'true') {
             window.location.href = 'login.html';
         }
     }
+
+    // 🔥 THIS LINE IS REQUIRED
     checkAuth();
 
 
